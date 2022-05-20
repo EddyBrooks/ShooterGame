@@ -5,8 +5,10 @@ import javax.swing.*;
 
 public class Character extends Rectangle{
 
-    Character(){
+    int xVelocity;
 
+    Character(int x, int y, int CHARACTER_WIDTH, int CHARACTER_HEIGHT){
+        super(x, y, CHARACTER_WIDTH, CHARACTER_HEIGHT);
     }
 
     public void keyPressed(KeyEvent e){
@@ -23,7 +25,8 @@ public class Character extends Rectangle{
     }
 
     public void draw(Graphics g){
-
+        g.setColor(Color.red);
+        g.fillRect(x, y, width, height);
     }
 
 }

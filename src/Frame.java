@@ -6,10 +6,12 @@ import javax.swing.*;
 public class Frame extends JFrame{
 
     Frame(){
+
         JLabel label = new JLabel();
-        ImageIcon Background = new ImageIcon("background.png");
-        label.setIcon(Background);
+        ImageIcon background = new ImageIcon("background.png");
+        label.setIcon(background);
         label.setBounds(0, 0, 615, 780);
+        label.setVerticalAlignment(JLabel.BOTTOM);
 
 
         this.setTitle("Game");
@@ -18,8 +20,15 @@ public class Frame extends JFrame{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
-        this.add(label);
+        this.setBackground(new Color(185,150,102));
+
         Panel panel = new Panel();
+        this.add(panel);
+        panel.setBackground(new Color(185,150,102));
         panel.run();
+        //this.add(label);
+
+
+
     }
 }
