@@ -11,23 +11,22 @@ public class Projectile extends Rectangle{
     Character character;
     Panel panel;
     Color currColor = new ColorUIResource(230, 25, 25);
+    Color lastColor;
 
     Projectile(int x, int y, int PROJ_WIDTH, int PROJ_HEIGHT){
         super(0, 0, PROJ_WIDTH, PROJ_HEIGHT);
+        lastColor = currColor;
     }
 
     public void keyPressed(KeyEvent e){
         if (e.getKeyCode()==KeyEvent.VK_SPACE){
             x = character.x1+(character.width/2-(width/2));
             y = character.y1;
+            lastColor = currColor;
             currColor = character.currColor;
         }
     }
-    /*
-    public void setYDirection(int yDirection){
-        yVelocity = yDirection;
-    }
-    */
+
     public void draw(Graphics g){
         g.setColor(currColor);
         g.fillOval(x, y, width, height);

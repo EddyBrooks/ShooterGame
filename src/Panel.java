@@ -37,6 +37,7 @@ public class Panel extends JPanel implements Runnable, ActionListener{
     public void newCharacter(){
         character = new Character((GAME_WIDTH/2)-(CHARACTER_WIDTH/2), ((GAME_HEIGHT/4)*3+30)-(CHARACTER_HEIGHT/2), CHARACTER_WIDTH, CHARACTER_HEIGHT);
         projectile = new Projectile((GAME_WIDTH/2)-(CHARACTER_WIDTH/2), ((GAME_HEIGHT/4)*3+30)-(CHARACTER_HEIGHT/2), PROJECTILE_DIAMETER, PROJECTILE_DIAMETER);
+        grid = new Grid();
     }
 
     public void newBoxes(){
@@ -52,6 +53,7 @@ public class Panel extends JPanel implements Runnable, ActionListener{
     public void draw(Graphics g){
         character.draw(g);
         projectile.draw(g);
+        grid.drawGrid(g);
     }
 
     public void move() {
@@ -89,8 +91,6 @@ public class Panel extends JPanel implements Runnable, ActionListener{
                 checkCollision();
                 repaint();
                 delta--;
-                System.out.println(character.getX()+ " : " + character.getY());
-                System.out.println(character.currColor);
             }
         }
     }
