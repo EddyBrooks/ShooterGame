@@ -9,7 +9,7 @@ public class Panel extends JPanel implements Runnable, ActionListener{
     static final int GAME_HEIGHT = 780;
     static final Dimension SCREEN_SIZE = new Dimension(GAME_WIDTH, GAME_HEIGHT);
     static final int PROJECTILE_DIAMETER = 10;
-    static final int CHARACTER_WIDTH = 30;
+    static final int CHARACTER_WIDTH = 100;
     static final int CHARACTER_HEIGHT = 10;
     Thread gameThread;
     Image image;
@@ -35,7 +35,8 @@ public class Panel extends JPanel implements Runnable, ActionListener{
     }
 
     public void newCharacter(){
-        character = new Character((GAME_WIDTH/2)-(CHARACTER_WIDTH/2), (GAME_HEIGHT/2)-(CHARACTER_HEIGHT/2), CHARACTER_WIDTH, CHARACTER_HEIGHT);
+        character = new Character((GAME_WIDTH/2)-(CHARACTER_WIDTH/2), ((GAME_HEIGHT/4)*3+30)-(CHARACTER_HEIGHT/2), CHARACTER_WIDTH, CHARACTER_HEIGHT);
+        projectile = new Projectile((GAME_WIDTH/2)-(CHARACTER_WIDTH/2), ((GAME_HEIGHT/4)*3+30)-(CHARACTER_HEIGHT/2), PROJECTILE_DIAMETER, PROJECTILE_DIAMETER);
     }
 
     public void newBoxes(){
@@ -50,25 +51,28 @@ public class Panel extends JPanel implements Runnable, ActionListener{
     }
     public void draw(Graphics g){
         character.draw(g);
+        projectile.draw(g);
     }
 
     public void move() {
-
+        character.move();
+        projectile.move();
     }
 
     public void checkCollision(){
-
+        //stops guy at edge
+        if (character.x <= 0){
+            character.x = 0;
+        }
+        if (character.x >= (GAME_WIDTH-CHARACTER_WIDTH-15)){
+            character.x = (GAME_WIDTH-CHARACTER_WIDTH-15);
+        }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
 
     }
-    /*
-    public void setIcon(ImageIcon image){
-        super.paintComponent(graphics);
-        graphics.drawImage(image, 0, 0, this);
-    }*/
 
     @Override
     public void run() {
@@ -85,17 +89,21 @@ public class Panel extends JPanel implements Runnable, ActionListener{
                 checkCollision();
                 repaint();
                 delta--;
-                //System.out.println(character.getX()+" " + character.getY());
+                System.out.println(character.getX()+ " : " + character.getY());
+                System.out.println(character.currColor);
             }
         }
     }
 
     public class AL extends KeyAdapter{
         public void keyPressed(KeyEvent e){
-
+            projectile.keyPressed(e);
+            character.keyPressed(e);
+            
+            
         }
         public void keyReleased(KeyEvent e){
-
+            character.keyReleased(e);
         }
     }
 
