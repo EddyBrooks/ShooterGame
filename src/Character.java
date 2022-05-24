@@ -9,14 +9,14 @@ import java.util.Random;
 public class Character extends Rectangle{
 
     int xVelocity;
-    int speed = 2;
-    public static Color currColor = new ColorUIResource(230, 25, 25);
+    int speed = 4;
+    public static Color currColor = new ColorUIResource(Color.red);
     public static int x1;
     public static int y1;
     public static int width;
     Random rand = new Random();
     Projectile projectile;
-    public final Color[] list = {Color.BLACK, Color.BLUE, Color.GREEN, Color.orange, Color.red, Color.white, Color.pink};
+    public final Color[] list = {Color.BLACK, Color.BLUE, Color.GREEN, Color.orange, Color.red, Color.white};
 
     Character(int x, int y, int CHARACTER_WIDTH, int CHARACTER_HEIGHT){
         super(x, y, CHARACTER_WIDTH, CHARACTER_HEIGHT);

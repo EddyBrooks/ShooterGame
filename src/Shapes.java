@@ -6,7 +6,7 @@ import javax.swing.plaf.ColorUIResource;
 
 public class Shapes extends Rectangle{
 
-    public final Color[] list = {Color.BLACK, Color.BLUE, Color.GREEN, Color.orange, Color.red, Color.white, Color.pink};
+    public final Color[] list = {Color.BLACK, Color.BLUE, Color.GREEN, Color.orange, Color.red, Color.white};
     public Color color;
     public int x1;
     public int y1;
@@ -29,7 +29,7 @@ public class Shapes extends Rectangle{
 
     public void draw(Graphics g){
         g.setColor(color);
-        g.fillRect(x, y, cubeWidth-10, cubeWidth);
+        g.fillRect(x, y+10, cubeWidth-10, cubeWidth-10);
         System.out.println(color);
     }
 }

@@ -15,6 +15,8 @@ public class Score extends Rectangle{
     }
 
     public void draw(Graphics g){
-
+        g.setColor(Color.black);
+        g.setFont(new Font("Consolas", Font.PLAIN, 40));
+        g.drawString(String.valueOf(plyrScore), GAME_WIDTH/2, GAME_HEIGHT-60);
     }
 }

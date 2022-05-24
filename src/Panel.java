@@ -11,6 +11,7 @@ public class Panel extends JPanel implements Runnable, ActionListener{
     static final int PROJECTILE_DIAMETER = 10;
     static final int CHARACTER_WIDTH = 100;
     static final int CHARACTER_HEIGHT = 10;
+    static int timesShot;
     Thread gameThread;
     Image image;
     Random random;
@@ -28,6 +29,7 @@ public class Panel extends JPanel implements Runnable, ActionListener{
         this.setFocusable(true);
         this.addKeyListener(new AL());
         this.setPreferredSize(SCREEN_SIZE);
+        timesShot = 0;
 
         gameThread = new Thread(this);
         gameThread.start();
@@ -54,6 +56,7 @@ public class Panel extends JPanel implements Runnable, ActionListener{
         character.draw(g);
         projectile.draw(g);
         grid.drawGrid(g);
+        score.draw(g);
     }
 
     public void move() {
@@ -68,6 +71,25 @@ public class Panel extends JPanel implements Runnable, ActionListener{
         }
         if (character.x >= (GAME_WIDTH-CHARACTER_WIDTH-15)){
             character.x = (GAME_WIDTH-CHARACTER_WIDTH-15);
+        }
+        //checks if ball hits correct shape
+        for (int i = 0; i < grid.ShapeGrid.length; i++){
+            for (int k = 0; k < grid.ShapeGrid[i].length; k++){
+                if (grid.ShapeGrid[i][k] != null && projectile.intersects(grid.ShapeGrid[i][k]) && projectile.currColor == grid.ShapeGrid[i][k].color){
+                    grid.ShapeGrid[i][k] = null;
+                    score.plyrScore++;
+                }
+            }
+        }
+
+        if (timesShot%10==10){
+        //    grid.newRow();
+        }
+    }
+
+    public void keyPressed1(KeyEvent e){
+        if (e.getKeyCode()==KeyEvent.VK_SPACE){
+            timesShot++;
         }
     }
 
@@ -88,8 +110,9 @@ public class Panel extends JPanel implements Runnable, ActionListener{
             lastTime = now;
             if (delta >= 1){
                 move();
-                checkCollision();
+
                 repaint();
+                checkCollision();
                 delta--;
             }
         }
@@ -99,8 +122,8 @@ public class Panel extends JPanel implements Runnable, ActionListener{
         public void keyPressed(KeyEvent e){
             projectile.keyPressed(e);
             character.keyPressed(e);
-            
-            
+            keyPressed1(e);
+
         }
         public void keyReleased(KeyEvent e){
             character.keyReleased(e);
