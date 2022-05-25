@@ -77,13 +77,17 @@ public class Panel extends JPanel implements Runnable, ActionListener{
             for (int k = 0; k < grid.ShapeGrid[i].length; k++){
                 if (grid.ShapeGrid[i][k] != null && projectile.intersects(grid.ShapeGrid[i][k]) && projectile.currColor == grid.ShapeGrid[i][k].color){
                     grid.ShapeGrid[i][k] = null;
+                    projectile.x = -20;
                     score.plyrScore++;
+                }
+                if (grid.ShapeGrid[i][k] != null && projectile.intersects(grid.ShapeGrid[i][k])){
+                    projectile.x = -20;
                 }
             }
         }
-
-        if (timesShot%10==10){
-        //    grid.newRow();
+        if (timesShot != 0 && timesShot%10==0){
+            grid.newRow();
+            timesShot++;
         }
     }
 
@@ -110,12 +114,13 @@ public class Panel extends JPanel implements Runnable, ActionListener{
             lastTime = now;
             if (delta >= 1){
                 move();
-
                 repaint();
                 checkCollision();
                 delta--;
             }
         }
+
+
     }
 
     public class AL extends KeyAdapter{
