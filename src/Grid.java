@@ -32,28 +32,37 @@ public class Grid {
                 temp[i][k] = ShapeGrid[i][k];
             }
         }
-        for (int i = 0; i < temp.length; i++){
-            System.out.println();
+        for (int i = ShapeGrid.length; i < temp.length; i++){
             for (int k = 0; k < temp[i].length; k++){
-                if (temp[i][k] != null){
-                    System.out.print(temp[i][k].color + " ");
-                }
-                else {
-                    System.out.print("NULL ");
-                }
+                temp[i][k] = new Shapes(k*123, 0);
+            }
+        }
+        ShapeGrid = new Shapes[temp.length][5];
+        for (int i = 0; i < temp.length; i++){
+            for (int k = 0; k < temp[i].length; k++){
+                ShapeGrid[i][k] = temp[i][k];
             }
         }
 
-        //TROUBLESHOOT HERE
-        System.out.println(temp.toString());
-        for (int i = ShapeGrid.length; i < temp.length; i++){
-            for (int k = ShapeGrid[0].length; k < temp[i].length; k++){
-                temp[i][k] = new Shapes(k*123, 0*123);
-                System.out.println(temp[i][k]);
+    }
+
+    public void updateRows(){
+        boolean containsAny = false;
+        for (int i = 0; i < 5; i++){
+            if (ShapeGrid[0][i] != null){
+                containsAny = true;
             }
         }
-        ShapeGrid = temp;
-        System.out.println("HERE" + ShapeGrid.length);
+        if (!containsAny){
+            Shapes[][] temp = new Shapes[ShapeGrid.length-1][5];
+            for (int i = 0; i < temp.length; i++){
+                for (int k = 0; k < ShapeGrid[i].length; k++){
+                    temp[i][k] = ShapeGrid[i+1][k];
+                }
+            }
+            ShapeGrid = temp;
+        }
+
     }
 
     public void drawGrid(Graphics g){

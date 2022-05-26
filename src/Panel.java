@@ -85,10 +85,7 @@ public class Panel extends JPanel implements Runnable, ActionListener{
                 }
             }
         }
-        if (timesShot != 0 && timesShot%10==0){
-            grid.newRow();
-            timesShot++;
-        }
+        grid.updateRows();
     }
 
     public void keyPressed1(KeyEvent e){
@@ -117,6 +114,10 @@ public class Panel extends JPanel implements Runnable, ActionListener{
                 repaint();
                 checkCollision();
                 delta--;
+                if (timesShot != 0 && timesShot%10==0){
+                    timesShot++;
+                    grid.newRow();
+                }
             }
         }
 
