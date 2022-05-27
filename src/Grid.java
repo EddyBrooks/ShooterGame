@@ -10,6 +10,7 @@ public class Grid {
     static final int GAME_HEIGHT = 780;
     Shapes[][] ShapeGrid;
     Random rand = new Random();
+    Health health;
     public final Color[] list = {Color.BLACK, Color.BLUE, Color.GREEN, Color.orange, Color.red, Color.white};
 
     Grid(){
@@ -20,6 +21,7 @@ public class Grid {
                 ShapeGrid[i][k] = new Shapes(k*123, (ShapeGrid.length-i-1)*123);
             }
         }
+        health = new Health(GAME_WIDTH, GAME_HEIGHT);
     }
 
     public void newRow(){
@@ -62,7 +64,19 @@ public class Grid {
             }
             ShapeGrid = temp;
         }
-
+        for (int i = 0; i < ShapeGrid.length; i++){
+            if (ShapeGrid[0][i] != null && ShapeGrid[0][i].y > 492){
+                Shapes[][] temp = new Shapes[ShapeGrid.length-1][5];
+                for (int p = 0; p < temp.length; p++){
+                    for (int j = 0; j < ShapeGrid[p].length; j++){
+                        temp[p][j] = ShapeGrid[p+1][j];
+                    }
+                }
+                health.lostLife();
+                ShapeGrid = temp;
+                i = 100;
+            }
+        }
     }
 
     public void drawGrid(Graphics g){
@@ -73,6 +87,7 @@ public class Grid {
                 }
             }
         }
+        health.draw(g);
     }
 
 }
