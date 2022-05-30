@@ -8,59 +8,86 @@ public class Grid {
 
     static final int GAME_WIDTH = 615;
     static final int GAME_HEIGHT = 780;
-    //ArrayList<ArrayList> ArrayRows;
-    //ArrayList<Shapes> ShapeGrid;
     Shapes[][] ShapeGrid;
     Random rand = new Random();
-    public final Color[] list = {Color.BLACK, Color.BLUE, Color.GREEN, Color.orange, Color.red, Color.white, Color.pink};
+    Health health;
+    public final Color[] list = {Color.BLACK, Color.BLUE, Color.GREEN, Color.orange, Color.red, Color.white};
 
     Grid(){
-        //ArrayRows = new ArrayList<>();
-        //ShapeGrid = new ArrayList<Shapes>();
-        ShapeGrid = new Shapes[1][5];
+
+        ShapeGrid = new Shapes[2][5];
         for (int i = 0; i < ShapeGrid.length; i++){
             for (int k = 0; k < ShapeGrid[i].length; k++){
-                ShapeGrid[i][k] = new Shapes(k*123, (ShapeGrid.length-1)*123);
+                ShapeGrid[i][k] = new Shapes(k*123, (ShapeGrid.length-i-1)*123);
             }
         }
-        /*
+        health = new Health(GAME_WIDTH, GAME_HEIGHT);
+    }
+
+    public void newRow(){
+        Shapes[][] temp = new Shapes[ShapeGrid.length+1][5];
         for (int i = 0; i < ShapeGrid.length; i++){
             for (int k = 0; k < ShapeGrid[i].length; k++){
-                int rand_int1 = rand.nextInt(list.length);
-                ShapeGrid[i][k].setColor(list[rand_int1]);
-                //System.out.println(ShapeGrid[i][k].toString());
+                if (ShapeGrid[i][k] != null){
+                    ShapeGrid[i][k].y += 123;
+                }
+                temp[i][k] = ShapeGrid[i][k];
+            }
+        }
+        for (int i = ShapeGrid.length; i < temp.length; i++){
+            for (int k = 0; k < temp[i].length; k++){
+                temp[i][k] = new Shapes(k*123, 0);
+            }
+        }
+        ShapeGrid = new Shapes[temp.length][5];
+        for (int i = 0; i < temp.length; i++){
+            for (int k = 0; k < temp[i].length; k++){
+                ShapeGrid[i][k] = temp[i][k];
             }
         }
 
-         */
-        /*
+    }
+
+    public void updateRows(){
+        boolean containsAny = false;
         for (int i = 0; i < 5; i++){
-            Shapes newShape = new Shapes(i*123, ArrayRows.size()*123);
-            ShapeGrid.add(newShape);
+            if (ShapeGrid[0][i] != null){
+                containsAny = true;
+            }
         }
-        ArrayRows.add(ShapeGrid);
-         */
-    }
-    /*
-    public void drawGrid(Graphics g){
-        for (int i = 0; i < ArrayRows.size(); i++){
-            for (int k = 0; k < ArrayRows.get(i).size(); k++){
-                System.out.println(ArrayRows.get(i).get(k).toString());
-                ShapeGrid.get(k).draw(g);
+        if (!containsAny){
+            Shapes[][] temp = new Shapes[ShapeGrid.length-1][5];
+            for (int i = 0; i < temp.length; i++){
+                for (int k = 0; k < ShapeGrid[i].length; k++){
+                    temp[i][k] = ShapeGrid[i+1][k];
+                }
+            }
+            ShapeGrid = temp;
+        }
+        for (int i = 0; i < ShapeGrid.length; i++){
+            if (ShapeGrid[0][i] != null && ShapeGrid[0][i].y > 492){
+                Shapes[][] temp = new Shapes[ShapeGrid.length-1][5];
+                for (int p = 0; p < temp.length; p++){
+                    for (int j = 0; j < ShapeGrid[p].length; j++){
+                        temp[p][j] = ShapeGrid[p+1][j];
+                    }
+                }
+                health.lostLife();
+                ShapeGrid = temp;
+                i = 100;
             }
         }
     }
-
-     */
 
     public void drawGrid(Graphics g){
         for (int i = 0; i < ShapeGrid.length; i++){
             for (int k = 0; k < ShapeGrid[i].length; k++){
-                ShapeGrid[i][k].draw(g);
-
-                //ShapeGrid[i][k].setColor();
-                //System.out.println(ShapeGrid[i][k].toString());
+                if (ShapeGrid[i][k] != null){
+                    ShapeGrid[i][k].draw(g);
+                }
             }
         }
+        health.draw(g);
     }
+
 }
