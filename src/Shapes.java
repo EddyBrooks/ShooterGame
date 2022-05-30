@@ -29,7 +29,7 @@ public class Shapes extends Rectangle{
 
     public void draw(Graphics g){
         g.setColor(color);
-        g.fillRect(x, y, cubeWidth-10, cubeWidth);
+        g.fillRect(x, y, cubeWidth-10, cubeWidth-10);
         System.out.println(color);
     }
 }
