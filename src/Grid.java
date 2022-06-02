@@ -15,7 +15,7 @@ public class Grid {
 
     Grid(){
 
-        ShapeGrid = new Shapes[2][5];
+        ShapeGrid = new Shapes[1][5];
         for (int i = 0; i < ShapeGrid.length; i++){
             for (int k = 0; k < ShapeGrid[i].length; k++){
                 ShapeGrid[i][k] = new Shapes(k*123, (ShapeGrid.length-i-1)*123);
@@ -74,6 +74,15 @@ public class Grid {
                 }
                 health.lostLife();
                 ShapeGrid = temp;
+                //HERE
+                ShapeGrid = new Shapes[1][5];
+                for (int j = 0; j < ShapeGrid.length; i++){
+                    for (int b = 0; b < ShapeGrid[j].length; b++){
+                        ShapeGrid[j][b] = new Shapes(b*123, (ShapeGrid.length-i-1)*123);
+                        System.out.println(ShapeGrid[j][b].color);
+                    }
+                }
+                //HERE
                 i = 100;
             }
         }

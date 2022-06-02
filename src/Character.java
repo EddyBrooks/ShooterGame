@@ -14,6 +14,7 @@ public class Character extends Rectangle{
     public static int x1;
     public static int y1;
     public static int width;
+    public static boolean visible;
     Random rand = new Random();
     Projectile projectile;
     public final Color[] list = {Color.BLACK, Color.BLUE, Color.GREEN, Color.orange, Color.red, Color.white};
@@ -23,6 +24,7 @@ public class Character extends Rectangle{
         x1 = x;
         y1 = y;
         width = CHARACTER_WIDTH;
+        visible = false;
     }
 
     public void keyPressed(KeyEvent e){
@@ -62,8 +64,10 @@ public class Character extends Rectangle{
     }
 
     public void draw(Graphics g){
-        g.setColor(currColor);
-        g.fillRect(x, y, width, height);
+        if (visible){
+            g.setColor(currColor);
+            g.fillRect(x, y, width, height);
+        }
     }
 
 }

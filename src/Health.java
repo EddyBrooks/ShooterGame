@@ -17,8 +17,8 @@ public class Health extends Rectangle{
 
     public void draw(Graphics g){
         g.setColor(Color.black);
-        g.setFont(new Font("Consolas", Font.PLAIN, 40));
-        g.drawString(String.valueOf(plyrLives), GAME_WIDTH/5, GAME_HEIGHT-60);
+        g.setFont(new Font("Consolas", Font.PLAIN, 30));
+        g.drawString("Lives Left: " + String.valueOf(plyrLives), 20, GAME_HEIGHT-60);
     }
 
     public void lostLife(){
