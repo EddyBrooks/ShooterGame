@@ -49,12 +49,15 @@ public class Grid {
     }
 
     public void updateRows(){
+        //checks if first row is empty
         boolean containsAny = false;
         for (int i = 0; i < 5; i++){
             if (ShapeGrid[0][i] != null){
                 containsAny = true;
             }
         }
+        //if first row is empty, updates it so that next row is first row
+        //To prevent array from getting too long
         if (!containsAny){
             Shapes[][] temp = new Shapes[ShapeGrid.length-1][5];
             for (int i = 0; i < temp.length; i++){
@@ -64,25 +67,29 @@ public class Grid {
             }
             ShapeGrid = temp;
         }
+
+        //HELP HERE ITS FUCKED
+
+        //Resets board and loses life if row gets too far down
         for (int i = 0; i < ShapeGrid.length; i++){
             if (ShapeGrid[0][i] != null && ShapeGrid[0][i].y > 492){
+                ShapeGrid = new Shapes[1][5];
+                for (int j = 0; i < ShapeGrid.length; i++){
+                    for (int k = 0; k < ShapeGrid[j].length; k++){
+                        ShapeGrid[j][k] = new Shapes(k*123, (ShapeGrid.length-j-1)*123);
+                    }
+                }
+                /*
                 Shapes[][] temp = new Shapes[ShapeGrid.length-1][5];
                 for (int p = 0; p < temp.length; p++){
-                    for (int j = 0; j < ShapeGrid[p].length; j++){
+                    for (int j = 0; j < temp[p].length; j++){
                         temp[p][j] = ShapeGrid[p+1][j];
                     }
                 }
+
+                 */
                 health.lostLife();
-                ShapeGrid = temp;
-                //HERE
-                ShapeGrid = new Shapes[1][5];
-                for (int j = 0; j < ShapeGrid.length; i++){
-                    for (int b = 0; b < ShapeGrid[j].length; b++){
-                        ShapeGrid[j][b] = new Shapes(b*123, (ShapeGrid.length-i-1)*123);
-                        System.out.println(ShapeGrid[j][b].color);
-                    }
-                }
-                //HERE
+                //ShapeGrid = temp;
                 i = 100;
             }
         }
