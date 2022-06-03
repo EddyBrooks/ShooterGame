@@ -141,10 +141,10 @@ public class Panel extends JPanel implements Runnable, ActionListener{
             keyPressed1(e);
 
         }
+
         public void keyReleased(KeyEvent e){
             character.keyReleased(e);
         }
     }
-
 
 }
