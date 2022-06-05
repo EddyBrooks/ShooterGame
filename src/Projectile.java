@@ -8,6 +8,7 @@ import javax.swing.plaf.ColorUIResource;
 public class Projectile extends Rectangle{
 
     int speed = 10;
+    public static boolean visible;
     Character character;
     Panel panel;
     Color currColor = new ColorUIResource(Color.red);
@@ -17,7 +18,7 @@ public class Projectile extends Rectangle{
     Projectile(int x, int y, int PROJ_WIDTH, int PROJ_HEIGHT){
         super(0, 0, PROJ_WIDTH, PROJ_HEIGHT);
         lastColor = currColor;
-
+        visible = false;
     }
 
     public void keyPressed(KeyEvent e){

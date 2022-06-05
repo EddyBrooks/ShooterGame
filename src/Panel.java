@@ -12,6 +12,7 @@ public class Panel extends JPanel implements Runnable, ActionListener{
     static final int CHARACTER_WIDTH = 100;
     static final int CHARACTER_HEIGHT = 10;
     static int timesShot;
+    int firstShot;
     Thread gameThread;
     Image image;
     Random random;
@@ -30,6 +31,7 @@ public class Panel extends JPanel implements Runnable, ActionListener{
         this.addKeyListener(new AL());
         this.setPreferredSize(SCREEN_SIZE);
         timesShot = 0;
+        firstShot = 0;
 
         gameThread = new Thread(this);
         gameThread.start();
@@ -92,6 +94,7 @@ public class Panel extends JPanel implements Runnable, ActionListener{
     public void keyPressed1(KeyEvent e){
         if (e.getKeyCode()==KeyEvent.VK_SPACE){
             timesShot++;
+            firstShot++;
         }
     }
 
@@ -118,6 +121,12 @@ public class Panel extends JPanel implements Runnable, ActionListener{
                 if (timesShot != 0 && timesShot%10==0){
                     timesShot++;
                     grid.newRow();
+
+                }
+                if (firstShot == 1){
+                    character.visible = true;
+                    projectile.visible = true;
+                    projectile.y = -100;
                 }
             }
         }
