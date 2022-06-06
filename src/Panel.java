@@ -65,7 +65,9 @@ public class Panel extends JPanel implements Runnable, ActionListener{
         if (!character.visible){
             text.drawFirst(g);
         }
-    
+        if (score.plyrScore == 0){
+            text.drawLast(g);
+        }
         score.draw(g);
     }
 

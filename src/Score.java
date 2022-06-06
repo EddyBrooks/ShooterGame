@@ -7,8 +7,8 @@ public class Score extends Rectangle{
 
     static int GAME_WIDTH;
     static int GAME_HEIGHT;
-    
-    int plyrScore;
+
+    public static int plyrScore;
 
     Score(int GAME_WIDTH, int GAME_HEIGHT){
         this.GAME_WIDTH = GAME_WIDTH;

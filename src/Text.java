@@ -34,8 +34,13 @@ public class Text extends Rectangle{
     
         g.setFont(new Font("Consolas", Font.BOLD, 40));
         g.drawString("CLICK SPACEBAR", GAME_WIDTH/2-160, GAME_HEIGHT/4*3);
-        g.drawString("TO START", GAME_WIDTH/2-100, GAME_HEIGHT/4*3+40
-        );
+        g.drawString("TO START", GAME_WIDTH/2-100, GAME_HEIGHT/4*3+40);
+    }
+
+    public void drawLast(Graphics g){
+        g.setColor(Color.black);
+        g.setFont(new Font("Consolas", Font.BOLD, 40));
+        g.drawString("YOU LOST", GAME_WIDTH/2, GAME_HEIGHT/2);
     }
 
 }
