@@ -22,11 +22,13 @@ public class Panel extends JPanel implements Runnable, ActionListener{
     Score score;
     Character character;
     Graphics graphics;
+    Text text;
 
     Panel(){
         newCharacter();
         //newShapes();
         score = new Score(GAME_WIDTH, GAME_HEIGHT);
+        text = new Text(GAME_WIDTH, GAME_WIDTH);
         this.setFocusable(true);
         this.addKeyListener(new AL());
         this.setPreferredSize(SCREEN_SIZE);
@@ -41,6 +43,7 @@ public class Panel extends JPanel implements Runnable, ActionListener{
     public void newCharacter(){
         character = new Character((GAME_WIDTH/2)-(CHARACTER_WIDTH/2), ((GAME_HEIGHT/4)*3+45)-(CHARACTER_HEIGHT/2), CHARACTER_WIDTH, CHARACTER_HEIGHT);
         projectile = new Projectile((GAME_WIDTH/2)-(CHARACTER_WIDTH/2), ((GAME_HEIGHT/4)*3+30)-(CHARACTER_HEIGHT/2), PROJECTILE_DIAMETER, PROJECTILE_DIAMETER);
+        
         grid = new Grid();
     }
 
@@ -58,6 +61,11 @@ public class Panel extends JPanel implements Runnable, ActionListener{
         character.draw(g);
         projectile.draw(g);
         grid.drawGrid(g);
+
+        if (!character.visible){
+            text.drawFirst(g);
+        }
+    
         score.draw(g);
     }
 
@@ -118,9 +126,12 @@ public class Panel extends JPanel implements Runnable, ActionListener{
                 repaint();
                 checkCollision();
                 delta--;
-                if (timesShot != 0 && timesShot%10==0){
+                if (timesShot != 0 && timesShot%11==0){
                     timesShot++;
-                    grid.newRow();
+                    if (!grid.changing){
+                        grid.newRow();
+                    }
+                    
 
                 }
                 if (firstShot == 1){
@@ -130,8 +141,6 @@ public class Panel extends JPanel implements Runnable, ActionListener{
                 }
             }
         }
-
-
     }
 
     public class AL extends KeyAdapter{
@@ -145,6 +154,5 @@ public class Panel extends JPanel implements Runnable, ActionListener{
             character.keyReleased(e);
         }
     }
-
 
 }
