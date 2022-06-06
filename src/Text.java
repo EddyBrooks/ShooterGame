@@ -19,6 +19,10 @@ public class Text extends Rectangle{
     }
     
     public void drawFirst(Graphics g){
+        g.setColor(Color.white);
+        g.setFont(new Font("Consolas", Font.BOLD, 70));
+        g.drawString("BLOCK BRIGADE", GAME_WIDTH/2-260, GAME_HEIGHT/3);
+
         g.setColor(Color.black);
         g.setFont(new Font("Consolas", Font.BOLD, 30));
         g.drawString("W", GAME_WIDTH/8-20, GAME_HEIGHT/2);
@@ -39,8 +43,8 @@ public class Text extends Rectangle{
 
     public void drawLast(Graphics g){
         g.setColor(Color.black);
-        g.setFont(new Font("Consolas", Font.BOLD, 40));
-        g.drawString("YOU LOST", GAME_WIDTH/2, GAME_HEIGHT/2);
+        g.setFont(new Font("Consolas", Font.BOLD, 70));
+        g.drawString("YOU LOST", GAME_WIDTH/2-150, GAME_HEIGHT/2);
     }
 
 }

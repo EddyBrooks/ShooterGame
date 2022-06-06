@@ -13,6 +13,7 @@ public class Panel extends JPanel implements Runnable, ActionListener{
     static final int CHARACTER_HEIGHT = 10;
     static int timesShot;
     int firstShot;
+    public static int timer = 0;
     Thread gameThread;
     Image image;
     Random random;
@@ -23,12 +24,14 @@ public class Panel extends JPanel implements Runnable, ActionListener{
     Character character;
     Graphics graphics;
     Text text;
+    Health health;
 
     Panel(){
         newCharacter();
         //newShapes();
         score = new Score(GAME_WIDTH, GAME_HEIGHT);
-        text = new Text(GAME_WIDTH, GAME_WIDTH);
+        text = new Text(GAME_WIDTH, GAME_HEIGHT);
+        health = new Health(GAME_WIDTH, GAME_HEIGHT);
         this.setFocusable(true);
         this.addKeyListener(new AL());
         this.setPreferredSize(SCREEN_SIZE);
@@ -65,9 +68,10 @@ public class Panel extends JPanel implements Runnable, ActionListener{
         if (!character.visible){
             text.drawFirst(g);
         }
-        if (score.plyrScore == 0){
+        if (health.plyrLives == 0){
             text.drawLast(g);
         }
+
         score.draw(g);
     }
 
@@ -119,7 +123,8 @@ public class Panel extends JPanel implements Runnable, ActionListener{
         double amountOfTicks = 60.0;
         double ns = 1000000000 / amountOfTicks;
         double delta = 0;
-        while(true){
+
+        while(true&&health.plyrLives!=0){
             long now = System.nanoTime();
             delta += (now - lastTime)/ns;
             lastTime = now;
@@ -128,13 +133,11 @@ public class Panel extends JPanel implements Runnable, ActionListener{
                 repaint();
                 checkCollision();
                 delta--;
-                if (timesShot != 0 && timesShot%11==0){
-                    timesShot++;
+                timer++;
+                if (timer%1400 == 0){
                     if (!grid.changing){
                         grid.newRow();
                     }
-                    
-
                 }
                 if (firstShot == 1){
                     character.visible = true;
@@ -142,7 +145,9 @@ public class Panel extends JPanel implements Runnable, ActionListener{
                     projectile.y = -100;
                 }
             }
+
         }
+
     }
 
     public class AL extends KeyAdapter{

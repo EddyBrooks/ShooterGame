@@ -41,6 +41,7 @@ public class Frame extends JFrame{
         this.add(panel);
         panel.setBackground(new Color(185,150,102));
         panel.run();
+
     }
 
     

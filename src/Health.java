@@ -7,7 +7,8 @@ public class Health extends Rectangle{
 
     static int GAME_WIDTH;
     static int GAME_HEIGHT;
-    int plyrLives;
+    public static int plyrLives;
+    Panel panel;
 
     Health(int GAME_WIDTH, int GAME_HEIGHT){
         this.GAME_WIDTH = GAME_WIDTH;
