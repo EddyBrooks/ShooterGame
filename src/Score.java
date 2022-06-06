@@ -7,6 +7,7 @@ public class Score extends Rectangle{
 
     static int GAME_WIDTH;
     static int GAME_HEIGHT;
+    
     int plyrScore;
 
     Score(int GAME_WIDTH, int GAME_HEIGHT){
@@ -16,6 +17,7 @@ public class Score extends Rectangle{
     }
 
     public void draw(Graphics g){
+
         g.setColor(Color.black);
         g.setFont(new Font("Consolas", Font.PLAIN, 30));
         g.drawString("Score: " + String.valueOf(plyrScore), GAME_WIDTH-200, GAME_HEIGHT-60);

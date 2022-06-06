@@ -9,7 +9,7 @@ import java.util.Random;
 public class Character extends Rectangle{
 
     int xVelocity;
-    int speed = 4;
+    int speed = 6;
     public static Color currColor = new ColorUIResource(Color.red);
     public static int x1;
     public static int y1;
