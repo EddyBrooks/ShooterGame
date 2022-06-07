@@ -67,6 +67,9 @@ public class Character extends Rectangle{
         if (visible){
             g.setColor(currColor);
             g.fillRect(x, y, width, height);
+            g.fillRect(x+(width/2)-(height/2), y-width/4, height+1, width/4);
+            g.setColor(Color.gray);
+            g.drawLine(x+(width/2), y, x+(width/2), -100);
         }
     }
 
