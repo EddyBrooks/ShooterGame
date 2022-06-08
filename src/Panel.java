@@ -12,7 +12,7 @@ public class Panel extends JPanel implements Runnable, ActionListener{
     static final int CHARACTER_WIDTH = 100;
     static final int CHARACTER_HEIGHT = 10;
     static int timesShot;
-    int firstShot;
+    static int firstShot;
     public static int timer = 0;
     Thread gameThread;
     Image image;
@@ -134,7 +134,7 @@ public class Panel extends JPanel implements Runnable, ActionListener{
                 checkCollision();
                 delta--;
                 timer++;
-                if (timer%1400 == 0){
+                if (timer%1200 == 0){
                     if (!grid.changing){
                         grid.newRow();
                     }

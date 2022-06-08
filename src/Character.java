@@ -37,7 +37,10 @@ public class Character extends Rectangle{
             move();
         }
         if (e.getKeyCode()==KeyEvent.VK_SPACE){
-            setColor();
+            if (projectile.y1 <= 20){
+                setColor();
+            }
+
         }
     }
     public void keyReleased(KeyEvent e){

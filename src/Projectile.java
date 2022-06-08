@@ -8,6 +8,7 @@ import javax.swing.plaf.ColorUIResource;
 public class Projectile extends Rectangle{
 
     int speed = 10;
+    public static int y1;
     public static boolean visible;
     Character character;
     Panel panel;
@@ -23,14 +24,17 @@ public class Projectile extends Rectangle{
 
     public void keyPressed(KeyEvent e){
         if (e.getKeyCode()==KeyEvent.VK_SPACE){
-            x = character.x1+(character.width/2-(width/2));
-            y = character.y1;
-            lastColor = currColor;
-            currColor = character.currColor;
+            if (y <= 20){
+                x = character.x1+(character.width/2-(width/2));
+                y = character.y1;
+                lastColor = currColor;
+                currColor = character.currColor;
+            }
         }
     }
 
     public void draw(Graphics g){
+        y1 = y;
         g.setColor(currColor);
         g.fillOval(x, y, width, height);
 
