@@ -9,12 +9,14 @@ import java.util.Random;
 public class Character extends Rectangle{
 
     int xVelocity;
-    int speed = 6;
+    static int speed = 6;
     public static Color currColor = new ColorUIResource(Color.red);
     public static int x1;
     public static int y1;
     public static int width;
     public static boolean visible;
+    static boolean moveLeft;
+    static boolean moveRight;
     Random rand = new Random();
     Projectile projectile;
     public final Color[] list = {Color.BLACK, Color.BLUE, Color.GREEN, Color.orange, Color.red, Color.white};
@@ -29,12 +31,10 @@ public class Character extends Rectangle{
 
     public void keyPressed(KeyEvent e){
         if (e.getKeyCode()==KeyEvent.VK_A){
-            setXDirection(-speed);
-            move();
+            moveLeft = true;
         }
         if (e.getKeyCode()==KeyEvent.VK_D){
-            setXDirection(speed);
-            move();
+            moveRight = true;
         }
         if (e.getKeyCode()==KeyEvent.VK_SPACE){
             if (projectile.y1 <= 20){
@@ -45,12 +45,10 @@ public class Character extends Rectangle{
     }
     public void keyReleased(KeyEvent e){
         if (e.getKeyCode()==KeyEvent.VK_A){
-            setXDirection(0);
-            move();
+            moveLeft = false;
         }
         if (e.getKeyCode()==KeyEvent.VK_D){
-            setXDirection(0);
-            move();
+            moveRight = false;
         }
     }
     public void setXDirection(int xDirection){

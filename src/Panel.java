@@ -14,6 +14,7 @@ public class Panel extends JPanel implements Runnable, ActionListener{
     static int timesShot;
     static int firstShot;
     public static int timer = 0;
+
     Thread gameThread;
     Image image;
     Random random;
@@ -76,7 +77,16 @@ public class Panel extends JPanel implements Runnable, ActionListener{
     }
 
     public void move() {
-        character.move();
+        if (character.moveRight){
+            character.setXDirection(character.speed);
+            character.move();
+        }
+        if (character.moveLeft){
+            character.setXDirection(-character.speed);
+            character.move();
+        }
+
+        //character.move();
         projectile.move();
     }
 
@@ -124,7 +134,7 @@ public class Panel extends JPanel implements Runnable, ActionListener{
         double ns = 1000000000 / amountOfTicks;
         double delta = 0;
 
-        while(true&&health.plyrLives!=0){
+        while(gameThread != null && health.plyrLives!=0){
             long now = System.nanoTime();
             delta += (now - lastTime)/ns;
             lastTime = now;
@@ -133,12 +143,16 @@ public class Panel extends JPanel implements Runnable, ActionListener{
                 repaint();
                 checkCollision();
                 delta--;
-                timer++;
-                if (timer%1200 == 0){
-                    if (!grid.changing){
-                        grid.newRow();
+                if (character.visible){
+                    timer++;
+                    if (timer%1050 == 0){
+                        if (!grid.changing){
+                            grid.newRow();
+                        }
                     }
                 }
+
+
                 if (firstShot == 1){
                     character.visible = true;
                     projectile.visible = true;

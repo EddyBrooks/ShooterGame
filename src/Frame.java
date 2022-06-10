@@ -11,7 +11,7 @@ public class Frame extends JFrame{
 
     Frame(){
 
-        this.setTitle("Game");
+        this.setTitle("Block Brigade");
         this.setResizable(false);
         this.setSize(615, 780);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -25,6 +25,8 @@ public class Frame extends JFrame{
         panel.run();
 
     }
+
+    //public static void
 
     
 }

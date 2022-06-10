@@ -84,8 +84,6 @@ public class Grid {
             }
             ShapeGrid = temp;
         }
-
-        //HELP HERE ITS FUCKED
         
         //Resets board and loses life if row gets too far down
         for (int i = 0; i < ShapeGrid.length; i++){
